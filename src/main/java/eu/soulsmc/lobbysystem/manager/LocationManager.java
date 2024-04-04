@@ -45,7 +45,7 @@ public class LocationManager {
         float yaw = (float) this.config.getConfig().getDouble("Locations" + "." + name + "." + "Yaw");
         float pitch = (float) this.config.getConfig().getDouble("Locations" + "." + name + "." + "Pitch");
 
-        return new Location(world, x, y, z, yaw, pitch);
+        return new Location(world, x, y + 1, z, yaw, pitch);
     }
 
     public boolean existLocation(@NotNull String name) {
