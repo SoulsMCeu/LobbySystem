@@ -80,7 +80,7 @@ public class LobbySystemCommand implements CommandExecutor, TabCompleter {
                                 .arguments(Component.text(name, this.lobbySystem.getColor()))));
             }
 
-            case "teleport" -> {
+            case "teleport", "tp" -> {
                 String name = args[1];
 
                 if(!this.locationManager.existLocation(name)) {
@@ -107,7 +107,7 @@ public class LobbySystemCommand implements CommandExecutor, TabCompleter {
                                                 @NotNull String label, @NotNull String[] args) {
         switch (args.length) {
             case 1 -> {
-                return Stream.of("set", "remove", "teleport").toList().stream().filter(s -> s.startsWith(args[0])).toList();
+                return Stream.of("set", "remove", "teleport", "tp").toList().stream().filter(s -> s.startsWith(args[0])).toList();
             }
 
             case 2 -> {
