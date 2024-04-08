@@ -1,15 +1,25 @@
 # LobbySystem
 
-<hr>
+Hi! This is our open source **LobbySystem** for SoulsMC.eu!. If you want to contribute, you can make a PR, we will look at it and maybe we will cherry-pick the commit!
 
-### Commands and its permissions
+# Language files
+
+Currently we support 2 languages!  
+de:  **resources/lobby_de.properties**  
+en_US: **resources/lobby_en_US.properties**
+
+If you want to add a new language make a new file named **lobby_<youre_Language>.properties**
+
+## Permissions
 
 
-| /lobbysystem | lobbysystem.command.use   |
-| /build       | lobbysystem.command.build |
-| /fish        | N/A                       |
+|Commands       |Permission                     |Usage              |
+|---------------|-------------------------------|-------------------|
+|/lobbysystem   |lobbysystem.command.use        |use,set,teleport,tp|
+|/build         |lobbysystem.command.build      |                   |
+|/fish          |                               |                   |
 
-<hr>
 
-Currently broken:  
-boots and more
+## Currently Broken
+
+You tell me
