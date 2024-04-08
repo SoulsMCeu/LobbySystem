@@ -12,7 +12,7 @@ public class Config {
     private final YamlConfiguration config;
 
     public Config() {
-        File dir = new File("./plugins/Lobby/");
+        File dir = new File("./plugins/LobbySystem/");
 
         if (!dir.exists()) {
             dir.mkdirs();
