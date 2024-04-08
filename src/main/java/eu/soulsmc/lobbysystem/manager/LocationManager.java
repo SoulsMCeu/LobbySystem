@@ -23,10 +23,9 @@ public class LocationManager {
     }
 
     public void setLocation(@NotNull String name, @NotNull Location location) {
-        this.config.getConfig().set("Locations" + "." + name + "." + "World", location.getWorld().getName());
-        this.config.getConfig().set("Locations" + "." + name + "." + "X", location.getX());
-        this.config.getConfig().set("Locations" + "." + name + "." + "Y", location.getY());
-        this.config.getConfig().set("Locations" + "." + name + "." + "Z", location.getZ());
+        this.config.getConfig().set("Locations" + "." + name + "." + "X", location.getBlockX());
+        this.config.getConfig().set("Locations" + "." + name + "." + "Y", location.getBlockY());
+        this.config.getConfig().set("Locations" + "." + name + "." + "Z", location.getBlockZ());
         this.config.getConfig().set("Locations" + "." + name + "." + "Yaw", location.getYaw());
         this.config.getConfig().set("Locations" + "." + name + "." + "Pitch", location.getPitch());
         this.config.save();
@@ -38,14 +37,13 @@ public class LocationManager {
     }
 
     public Location getLocation(@NotNull String name) {
-        World world = this.lobbySystem.getServer().getWorld(this.config.getConfig().getString("Locations" + "." + name + "." + "World"));
         double x = this.config.getConfig().getDouble("Locations" + "." + name + "." + "X");
         double y = this.config.getConfig().getDouble("Locations" + "." + name + "." + "Y");
         double z = this.config.getConfig().getDouble("Locations" + "." + name + "." + "Z");
         float yaw = (float) this.config.getConfig().getDouble("Locations" + "." + name + "." + "Yaw");
         float pitch = (float) this.config.getConfig().getDouble("Locations" + "." + name + "." + "Pitch");
 
-        return new Location(world, x, y + 1, z, yaw, pitch);
+        return new Location(this.lobbySystem.getServer().getWorld("world"), x + 0.5, y + 1, z + 0.5, yaw, pitch);
     }
 
     public boolean existLocation(@NotNull String name) {
