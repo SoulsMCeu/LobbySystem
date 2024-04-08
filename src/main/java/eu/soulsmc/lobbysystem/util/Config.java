@@ -33,10 +33,10 @@ public class Config {
     }
 
     private void addDefaults() {
-        this.addDefault("BroadcastMessages", Arrays.asList("§7Unser Discord §8» §edc.SoulsMC.eu",
-                "§7Unsere Webseite §8» §ewww.soulsmc.eu",
-                "§7Unser Forum §8» §eforum.soulsmc.eu",
-                "§7Bewerbe dich unter §eapply§8@§esoulsmc.eu§8!"));
+        this.addDefault("BroadcastMessages", Arrays.asList("§7Discord §8» §edc.SoulsMC.eu",
+                "§7Webseite §8» §ewww.soulsmc.eu",
+                "§7Forum §8» §eforum.soulsmc.eu",
+                "§7Get a Team member! §8»  §eapply§8@§esoulsmc.eu§8!"));
         this.addDefault("Server" + "." + "DevServer", "devserver1");
         this.addDefault("Server" + "." + "BauServer", "bauserver1");
         this.addDefault("Server" + "." + "Lobby1", "lobby1");
