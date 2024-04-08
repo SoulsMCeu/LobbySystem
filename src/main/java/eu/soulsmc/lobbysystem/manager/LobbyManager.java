@@ -129,6 +129,15 @@ public class LobbyManager {
     }
 
     private void setTeamBoots(@NotNull Player player) {
+        int[] color = getTeamBootsColor(player);
+        player.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS)
+                .setDisplayName(Component.text(this.getRank(player, true) + " §7Boots"))
+                .setColor(Color.fromRGB(color[0], color[1], color[2]))
+                .addItemFlags(ItemFlag.values())
+                .build());
+    }
+
+    public int[] getTeamBootsColor(@NotNull Player player) {
         final Map<String, int[]> rankColors = new HashMap<>();
         rankColors.put("Inhaber", new int[]{170, 0, 0});
         rankColors.put("Admin", new int[]{170, 0, 0});
@@ -138,12 +147,7 @@ public class LobbyManager {
         rankColors.put("Builder", new int[]{85, 255, 85});
         rankColors.put("Azubi", new int[]{0, 170, 170});
 
-        int[] color = rankColors.get(getRank(player, false));
-        player.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS)
-                .setDisplayName(Component.text(this.getRank(player, true) + " §7Boots"))
-                .setColor(Color.fromRGB(color[0], color[1], color[2]))
-                .addItemFlags(ItemFlag.values())
-                .build());
+        return rankColors.get(getRank(player, false));
     }
 
     public void toggleFlyMode(@NotNull Player player) {

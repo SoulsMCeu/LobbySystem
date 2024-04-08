@@ -160,7 +160,7 @@ public class ItemsManager {
                 .build());
 
         if(player.getInventory().getHelmet() != null || player.getInventory().getBoots() != null
-                && this.hasExtrasBoosts(player) || player.getInventory().getItem(2).getType().equals(Material.FISHING_ROD)) {
+                && this.hasTeamBoots(player) || player.getInventory().getItem(2).getType().equals(Material.FISHING_ROD)) {
             inventory.setItem(26, new ItemBuilder(Material.BARRIER)
                     .setDisplayName(GlobalTranslator.render(Component.translatable(
                                     "lobby.inventory.profile.extras.reset.displayname", NamedTextColor.RED)
@@ -171,17 +171,8 @@ public class ItemsManager {
         return inventory;
     }
 
-    private boolean hasExtrasBoosts(@NotNull Player player) {
-        final Map<String, int[]> rankColors = new HashMap<>();
-        rankColors.put("Inhaber", new int[]{170, 0, 0});
-        rankColors.put("Admin", new int[]{170, 0, 0});
-        rankColors.put("Developer", new int[]{85, 255, 255});
-        rankColors.put("Moderator", new int[]{255, 255, 75});
-        rankColors.put("Supporter", new int[]{85, 255, 85});
-        rankColors.put("Builder", new int[]{85, 255, 85});
-        rankColors.put("Azubi", new int[]{0, 170, 170});
-
-        int[] color = rankColors.get(this.lobbySystem.getLobbyManager().getRank(player, false));
+    private boolean hasTeamBoots(@NotNull Player player) {
+        int[] color = this.lobbySystem.getLobbyManager().getTeamBootsColor(player);
         LeatherArmorMeta leatherMeta = (LeatherArmorMeta) player.getInventory().getBoots().getItemMeta();
         return !leatherMeta.getColor().equals(Color.fromRGB(color[0], color[1], color[2]));
     }
