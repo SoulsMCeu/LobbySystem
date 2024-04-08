@@ -534,6 +534,7 @@ public class LobbyListeners implements Listener {
         }
 
         switch (itemStack.getType()) {
+            case ARROW -> player.openInventory(this.lobbySystem.getItemsManager().profileInventory(player));
             case DIAMOND_BOOTS -> player.openInventory(this.lobbySystem.getItemsManager().bootsInventory(player));
             case CARVED_PUMPKIN -> player.openInventory(this.lobbySystem.getItemsManager().headsInventory(player));
             case REDSTONE_BLOCK -> player.openInventory(this.lobbySystem.getItemsManager().gadgetsInventory(player));
@@ -569,6 +570,10 @@ public class LobbyListeners implements Listener {
 
         if(itemStack == null) {
             return;
+        }
+
+        if(itemStack.getType().equals(Material.ARROW)) {
+            player.openInventory(this.lobbySystem.getItemsManager().extrasInventory(player));
         }
 
         if(itemStack.getType().equals(Material.AIR)) {
@@ -629,6 +634,10 @@ public class LobbyListeners implements Listener {
             return;
         }
 
+        if(itemStack.getType().equals(Material.ARROW)) {
+            player.openInventory(this.lobbySystem.getItemsManager().extrasInventory(player));
+        }
+
         if(itemStack.getType().equals(Material.AIR)) {
             return;
         }
@@ -670,6 +679,10 @@ public class LobbyListeners implements Listener {
 
         if(itemStack == null) {
             return;
+        }
+
+        if(itemStack.getType().equals(Material.ARROW)) {
+            player.openInventory(this.lobbySystem.getItemsManager().extrasInventory(player));
         }
 
         if(itemStack.getType().equals(Material.AIR)) {

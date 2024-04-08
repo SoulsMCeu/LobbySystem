@@ -159,6 +159,12 @@ public class ItemsManager {
                 .addItemFlags(ItemFlag.values())
                 .build());
 
+        inventory.setItem(18, new ItemBuilder(Material.ARROW)
+                .setDisplayName(GlobalTranslator.render(Component.translatable(
+                                "lobby.inventory.profile.extras.back.displayname", NamedTextColor.RED)
+                        .decoration(TextDecoration.ITALIC, false), player.locale()))
+                .build());
+
         if(player.getInventory().getHelmet() != null || player.getInventory().getBoots() != null
                 && this.hasTeamBoots(player) || player.getInventory().getItem(2).getType().equals(Material.FISHING_ROD)) {
             inventory.setItem(26, new ItemBuilder(Material.BARRIER)
@@ -208,6 +214,13 @@ public class ItemsManager {
                 .setColor(Color.fromRGB(29, 97, 83))
                 .addItemFlags(ItemFlag.values())
                 .build());
+
+        inventory.setItem(18, new ItemBuilder(Material.ARROW)
+                .setDisplayName(GlobalTranslator.render(Component.translatable(
+                                "lobby.inventory.profile.extras.back.displayname", NamedTextColor.RED)
+                        .decoration(TextDecoration.ITALIC, false), player.locale()))
+                .build());
+
         return inventory;
     }
 
@@ -254,6 +267,11 @@ public class ItemsManager {
                         .decoration(TextDecoration.ITALIC, false))
                 .setSkullOwner("x33")
                 .build());
+        inventory.setItem(18, new ItemBuilder(Material.ARROW)
+                .setDisplayName(GlobalTranslator.render(Component.translatable(
+                                "lobby.inventory.profile.extras.back.displayname", NamedTextColor.RED)
+                        .decoration(TextDecoration.ITALIC, false), player.locale()))
+                .build());
 
         return inventory;
     }
@@ -271,6 +289,12 @@ public class ItemsManager {
                                 "lobby.inventory.profile.extras.gadgets.rod.displayname", NamedTextColor.RED)
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .build());
+        inventory.setItem(18, new ItemBuilder(Material.ARROW)
+                .setDisplayName(GlobalTranslator.render(Component.translatable(
+                                "lobby.inventory.profile.extras.back.displayname", NamedTextColor.RED)
+                        .decoration(TextDecoration.ITALIC, false), player.locale()))
+                .build());
+
         return inventory;
     }
 
