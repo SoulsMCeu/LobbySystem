@@ -210,8 +210,9 @@ public class LobbyListeners implements Listener {
         }
 
         String title = LegacyComponentSerializer.legacySection().serialize(event.getView().title());
-        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(this.itemsManager.getNavigatorTitle());
-        if (!inventoryTitle.startsWith(title)) {
+        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(GlobalTranslator.render
+                (this.itemsManager.getNavigatorTitle(), player.locale()));
+        if (!inventoryTitle.equals(title)) {
             return;
         }
 
@@ -302,8 +303,9 @@ public class LobbyListeners implements Listener {
         }
 
         String title = LegacyComponentSerializer.legacySection().serialize(event.getView().title());
-        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(this.itemsManager.getLobbySwitcherTitle());
-        if (!inventoryTitle.startsWith(title)) {
+        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(GlobalTranslator.render
+                (this.itemsManager.getLobbySwitcherTitle(), player.locale()));
+        if (!inventoryTitle.equals(title)) {
             return;
         }
 
@@ -477,8 +479,10 @@ public class LobbyListeners implements Listener {
         }
 
         String title = LegacyComponentSerializer.legacySection().serialize(event.getView().title());
-        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(this.itemsManager.getProfileTitle());
-        if (!inventoryTitle.startsWith(title)) {
+        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(GlobalTranslator.render
+                (this.itemsManager.getProfileTitle(), player.locale()));
+
+        if (!inventoryTitle.equals(title)) {
             return;
         }
 
@@ -516,11 +520,11 @@ public class LobbyListeners implements Listener {
         }
 
         String title = LegacyComponentSerializer.legacySection().serialize(event.getView().title());
-        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(this.itemsManager.getExtrasTitle());
+        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(GlobalTranslator.render
+                (this.itemsManager.getExtrasTitle(), player.locale()));
         if (!inventoryTitle.startsWith(title)) {
             return;
         }
-
         event.setCancelled(true);
 
         ItemStack itemStack = event.getCurrentItem();
@@ -559,8 +563,9 @@ public class LobbyListeners implements Listener {
         }
 
         String title = LegacyComponentSerializer.legacySection().serialize(event.getView().title());
-        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(this.itemsManager.getBootsTitle());
-        if (!inventoryTitle.startsWith(title)) {
+        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(GlobalTranslator.render
+                (this.itemsManager.getBootsTitle(), player.locale()));
+        if (!inventoryTitle.equals(title)) {
             return;
         }
 
@@ -621,8 +626,9 @@ public class LobbyListeners implements Listener {
         }
 
         String title = LegacyComponentSerializer.legacySection().serialize(event.getView().title());
-        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(this.itemsManager.getHeadsTitle());
-        if (!inventoryTitle.startsWith(title)) {
+        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(GlobalTranslator.render
+                (this.itemsManager.getHeadsTitle(), player.locale()));
+        if (!inventoryTitle.equals(title)) {
             return;
         }
 
@@ -668,8 +674,9 @@ public class LobbyListeners implements Listener {
         }
 
         String title = LegacyComponentSerializer.legacySection().serialize(event.getView().title());
-        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(this.itemsManager.getGadgetsTitle());
-        if (!inventoryTitle.startsWith(title)) {
+        String inventoryTitle = LegacyComponentSerializer.legacySection().serialize(GlobalTranslator.render
+                (this.itemsManager.getGadgetsTitle(), player.locale()));
+        if (!inventoryTitle.equals(title)) {
             return;
         }
 
