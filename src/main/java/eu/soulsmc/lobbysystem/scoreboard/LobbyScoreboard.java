@@ -18,8 +18,6 @@ public class LobbyScoreboard extends ScoreboardBuilder {
 
     @Override
     public void createScoreboard() {
-        String discordLink = "§adc§8.§aSoulsMC§8.§aeu";
-        String websiteLink = "§cwww§8.§cSoulsMC§8.§ceu";
 
         this.lobbySystem.getServer().getScheduler().runTaskLater(this.lobbySystem, () -> {
             this.setScore(Component.text("§8§m                        §1"), 12);
@@ -38,12 +36,14 @@ public class LobbyScoreboard extends ScoreboardBuilder {
             this.setScore(GlobalTranslator.render(Component.translatable(
                     "lobby.scoreboard.score.discord", NamedTextColor.GRAY), player.locale()),5);
             this.setScore(Component.text(" »", NamedTextColor.DARK_GRAY).appendSpace()
-                    .append(Component.text(discordLink)), 4);
+                    .append(GlobalTranslator.render(Component.translatable(
+                            "lobby.scoreboard.score.discord.url"), player.locale())), 4);
             this.setScore(Component.text(ChatColor.DARK_AQUA.toString()), 3);
             this.setScore(GlobalTranslator.render(Component.translatable(
                     "lobby.scoreboard.score.website", NamedTextColor.GRAY), player.locale()),2);
             this.setScore(Component.text(" »", NamedTextColor.DARK_GRAY).appendSpace()
-                    .append(Component.text(websiteLink)), 1);
+                    .append(GlobalTranslator.render(Component.translatable(
+                            "lobby.scoreboard.score.website.url"), player.locale())), 1);
             this.setScore(Component.text("§8§m                        §2"), 0);
         }, 1L);
     }
