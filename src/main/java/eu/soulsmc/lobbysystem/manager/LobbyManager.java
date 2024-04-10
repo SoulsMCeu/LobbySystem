@@ -54,7 +54,7 @@ public class LobbyManager {
         player.setHealth(20.0);
         player.setFoodLevel(20);
 
-        player.setLevel(Year.now().getValue());
+        player.setLevel(Year.now().getValue() - 1);
         player.setExp(1.0f);
     }
 
