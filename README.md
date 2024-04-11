@@ -15,11 +15,12 @@ If you want to add a new language make a new file named **lobby_<youre_Language>
 
 ### Commands
 
-| Commands     | Permission                | Usage               |
-|--------------|---------------------------|---------------------|
-| /lobbysystem | lobbysystem.command.use   | use,set,teleport,tp |
-| /build       | lobbysystem.command.build |                     |
-| /fish        |                           |                     |
+| Commands     | Permission                      | Usage               |
+|--------------|---------------------------------|---------------------|
+| /lobbysystem | lobbysystem.command.lobbysystem | use,set,teleport,tp |
+| /build       | lobbysystem.command.build       |                     |
+| /build       | lobbysystem.command.build.other | [Player Name]       |
+| /fish        |                                 |                     |
 
 ### Lobby Switcher
 
