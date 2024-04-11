@@ -439,6 +439,35 @@ public class LobbyListeners implements Listener {
     }
 
     @EventHandler
+    public void onEnderpearl(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        ItemStack itemStack = event.getItem();
+
+        if(event.getAction().isLeftClick()) {
+            return;
+        }
+
+        if(itemStack == null) {
+            return;
+        }
+
+        if(itemStack.getType().equals(Material.AIR)) {
+            return;
+        }
+
+        if(!itemStack.getType().equals(Material.ENDER_PEARL)) {
+            return;
+        }
+
+        if(!itemStack.hasItemMeta()) {
+            return;
+        }
+
+        this.lobbySystem.getServer().getScheduler().runTaskLater(
+                this.lobbySystem, () -> this.getEnderpearlItem(player), 1L);
+    }
+
+    @EventHandler
     public void onProfile(@NotNull PlayerInteractEvent event) {
         Player player = event.getPlayer();
         ItemStack itemStack = event.getItem();
@@ -695,18 +724,31 @@ public class LobbyListeners implements Listener {
             return;
         }
 
-        if(!itemStack.getType().equals(Material.FISHING_ROD)) {
+        if(!itemStack.getType().equals(Material.FISHING_ROD) && !itemStack.getType().equals(Material.ENDER_PEARL)) {
             return;
         }
 
         player.closeInventory();
-        player.getInventory().setItem(2, new ItemBuilder(Material.FISHING_ROD)
+        if (itemStack.getType().equals(Material.FISHING_ROD)) {
+            player.getInventory().setItem(2, new ItemBuilder(Material.FISHING_ROD)
+                    .setDisplayName(GlobalTranslator.render(this.lobbySystem.getItemsPrefix()
+                            .append(Component.translatable("lobby.items.gadget.rod.displayname", NamedTextColor.GRAY))
+                            .decoration(TextDecoration.ITALIC, false), player.locale()))
+                    .setUnbreakable(true)
+                    .addItemFlags(ItemFlag.HIDE_UNBREAKABLE)
+                    .build());
+        } else if (itemStack.getType().equals(Material.ENDER_PEARL)) {
+            this.getEnderpearlItem(player);
+        }
+    }
+
+    private void getEnderpearlItem(@NotNull Player player) {
+        player.getInventory().setItem(2, new ItemBuilder(Material.ENDER_PEARL)
                 .setDisplayName(GlobalTranslator.render(this.lobbySystem.getItemsPrefix()
-                        .append(Component.translatable("lobby.items.gadget.rod.displayname", NamedTextColor.GRAY))
+                        .append(Component.translatable("lobby.items.gadget.enderpearl.displayname", NamedTextColor.GRAY))
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .setUnbreakable(true)
                 .addItemFlags(ItemFlag.HIDE_UNBREAKABLE)
                 .build());
-
     }
 }

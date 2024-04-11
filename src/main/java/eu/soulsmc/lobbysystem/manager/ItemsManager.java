@@ -167,7 +167,8 @@ public class ItemsManager {
                 .build());
 
         if (player.getInventory().getHelmet() != null || player.getInventory().getBoots() != null
-                && this.hasTeamBoots(player) || player.getInventory().getItem(2).getType().equals(Material.FISHING_ROD)) {
+                && this.hasTeamBoots(player) || player.getInventory().getItem(2).getType().equals(Material.FISHING_ROD)
+        || player.getInventory().getItem(2).getType().equals(Material.ENDER_PEARL)) {
             inventory.setItem(26, new ItemBuilder(Material.BARRIER)
                     .setDisplayName(GlobalTranslator.render(Component.translatable(
                                     "lobby.inventory.profile.extras.reset.displayname")
@@ -285,9 +286,14 @@ public class ItemsManager {
             inventory.setItem(i, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).setDisplayName(Component.empty()).build());
         }
 
-        inventory.setItem(13, new ItemBuilder(Material.FISHING_ROD)
+        inventory.setItem(12, new ItemBuilder(Material.FISHING_ROD)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
                                 "lobby.inventory.profile.extras.gadgets.rod.displayname")
+                        .decoration(TextDecoration.ITALIC, false), player.locale()))
+                .build());
+        inventory.setItem(14, new ItemBuilder(Material.ENDER_PEARL)
+                .setDisplayName(GlobalTranslator.render(Component.translatable(
+                                "lobby.inventory.profile.extras.gadgets.enderpearl.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .build());
         inventory.setItem(18, new ItemBuilder(Material.ARROW)

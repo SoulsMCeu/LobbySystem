@@ -105,6 +105,10 @@ public class GameruleListeners implements Listener {
             return;
         }
 
+        if(event.getItem() != null && event.getItem().getType().equals(Material.ENDER_PEARL)) {
+            return;
+        }
+
         event.setCancelled(true);
     }
 
