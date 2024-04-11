@@ -6,7 +6,6 @@ import eu.soulsmc.lobbysystem.util.ItemBuilder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.translation.GlobalTranslator;
 import org.bukkit.*;
@@ -251,7 +250,7 @@ public class LobbyListeners implements Listener {
     private void teleportPlayer(@NotNull Player player, @NotNull String name) {
         if(!this.lobbySystem.getLocationManager().existLocation(name)) {
             player.sendMessage(this.lobbySystem.getPrefix()
-                    .append(Component.translatable("lobby.inventory.navigator.invalid.location", NamedTextColor.RED)));
+                    .append(Component.translatable("lobby.inventory.navigator.invalid.location", NamedTextColor.GRAY)));
             player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 1.0f, 1.0f);
             return;
         }
@@ -593,21 +592,21 @@ public class LobbyListeners implements Listener {
         switch (event.getSlot()) {
             case 12 -> player.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS)
                     .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                    "lobby.inventory.profile.extras.boots.love-boots.displayname", NamedTextColor.RED)
+                                    "lobby.inventory.profile.extras.boots.love-boots.displayname")
                             .decoration(TextDecoration.ITALIC, false), player.locale()))
                     .setColor(Color.fromRGB(255, 0, 0))
                     .addItemFlags(ItemFlag.values())
                     .build());
             case 13 -> player.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS)
                     .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                    "lobby.inventory.profile.extras.boots.angry-boots.displayname", NamedTextColor.RED)
+                                    "lobby.inventory.profile.extras.boots.angry-boots.displayname")
                             .decoration(TextDecoration.ITALIC, false), player.locale()))
                     .setColor(Color.fromRGB(99, 99, 99))
                     .addItemFlags(ItemFlag.values())
                     .build());
             case 14 -> player.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS)
                     .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                    "lobby.inventory.profile.extras.boots.water-boots.displayname", NamedTextColor.RED)
+                                    "lobby.inventory.profile.extras.boots.water-boots.displayname")
                             .decoration(TextDecoration.ITALIC, false), player.locale()))
                     .setColor(Color.fromRGB(29, 97, 83))
                     .addItemFlags(ItemFlag.values())
@@ -657,7 +656,7 @@ public class LobbyListeners implements Listener {
         String playerName = skullMeta.getOwner();
 
         player.getInventory().setHelmet( new ItemBuilder(Material.PLAYER_HEAD)
-                .setDisplayName(Component.text(playerName, NamedTextColor.RED)
+                .setDisplayName(Component.text(playerName)
                         .decoration(TextDecoration.ITALIC, false))
                 .setSkullOwner(playerName)
                 .build());
@@ -702,15 +701,12 @@ public class LobbyListeners implements Listener {
 
         player.closeInventory();
         player.getInventory().setItem(2, new ItemBuilder(Material.FISHING_ROD)
-                .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                "lobby.items.prefix", this.lobbySystem.getColor())
-                        .decoration(TextDecoration.ITALIC, false)
-                        .arguments(Component.text(".", NamedTextColor.DARK_GRAY),
-                                Component.text("✖", NamedTextColor.DARK_GRAY))
-                        .appendSpace().append(Component.translatable("lobby.items.gadget.rod.displayname",
-                                NamedTextColor.GRAY)).decoration(TextDecoration.ITALIC, false), player.locale()))
+                .setDisplayName(GlobalTranslator.render(this.lobbySystem.getItemsPrefix()
+                        .append(Component.translatable("lobby.items.gadget.rod.displayname", NamedTextColor.GRAY))
+                        .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .setUnbreakable(true)
                 .addItemFlags(ItemFlag.HIDE_UNBREAKABLE)
                 .build());
+
     }
 }

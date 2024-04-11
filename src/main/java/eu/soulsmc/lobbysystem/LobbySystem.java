@@ -12,8 +12,7 @@ import eu.soulsmc.lobbysystem.manager.ItemsManager;
 import eu.soulsmc.lobbysystem.util.Config;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.translation.GlobalTranslator;
 import net.kyori.adventure.translation.TranslationRegistry;
 import net.kyori.adventure.util.UTF8ResourceBundleControl;
@@ -24,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class LobbySystem extends JavaPlugin{
+public class LobbySystem extends JavaPlugin {
 
     private LobbyManager lobbyManager;
     private ItemsManager itemsManager;
@@ -67,14 +66,15 @@ public class LobbySystem extends JavaPlugin{
         this.getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
     }
 
-    public TextColor getColor() {
-        return NamedTextColor.BLUE;
+    public Component getPrefix() {
+        return Component.translatable("prefix.text")
+                .decoration(TextDecoration.ITALIC, false);
     }
 
-    public Component getPrefix() {
-        return Component.text("»", NamedTextColor.DARK_GRAY)
-                .appendSpace().append(Component.translatable("prefix.text", this.getColor())
-                        .appendSpace().append(Component.text("|", NamedTextColor.DARK_GRAY).appendSpace()));
+    public Component getItemsPrefix() {
+        return Component.translatable("server.text").appendSpace()
+                .append(Component.translatable("lobby.items.character")
+                        .decoration(TextDecoration.ITALIC, false));
     }
 
     @NotNull
@@ -105,7 +105,7 @@ public class LobbySystem extends JavaPlugin{
     private void registerTranslation() {
         TranslationRegistry registry = TranslationRegistry.create(Key.key("lobby:localization"));
 
-        for(Locale locale : Locale.getAvailableLocales()) {
+        for (Locale locale : Locale.getAvailableLocales()) {
             ResourceBundle bundle = ResourceBundle.getBundle("lobby", locale, UTF8ResourceBundleControl.get());
             registry.registerAll(locale, bundle, false);
         }

@@ -37,13 +37,13 @@ public class LobbySystemCommand implements CommandExecutor, TabCompleter {
 
         if(!player.hasPermission("lobbysystem.command.lobbysystem")) {
             player.sendMessage(this.lobbySystem.getPrefix()
-                    .append(Component.translatable("command.lobbysystem.invalid.permission", NamedTextColor.RED)));
+                    .append(Component.translatable("command.lobbysystem.invalid.permission")));
             return true;
         }
 
         if(args.length != 2) {
             player.sendMessage(this.lobbySystem.getPrefix()
-                    .append(Component.translatable("command.lobbysystem.invalid.usages", NamedTextColor.WHITE)));
+                    .append(Component.translatable("command.lobbysystem.invalid.usages")));
             return true;
         }
 
@@ -54,14 +54,14 @@ public class LobbySystemCommand implements CommandExecutor, TabCompleter {
 
                 if(this.locationManager.existLocation(name)) {
                     player.sendMessage(this.lobbySystem.getPrefix()
-                            .append(Component.translatable("command.lobbysystem.set.invalid.name", NamedTextColor.RED)));
+                            .append(Component.translatable("command.lobbysystem.set.invalid.name", NamedTextColor.YELLOW)));
                     return true;
                 }
 
                 this.locationManager.setLocation(name, location);
                 player.sendMessage(this.lobbySystem.getPrefix()
-                        .append(Component.translatable("command.lobbysystem.set", NamedTextColor.GRAY)
-                                .arguments(Component.text(name, this.lobbySystem.getColor()))));
+                        .append(Component.translatable("command.lobbysystem.set", NamedTextColor.YELLOW)
+                                .arguments(Component.text(name))));
                 return true;
             }
 
@@ -70,14 +70,14 @@ public class LobbySystemCommand implements CommandExecutor, TabCompleter {
 
                 if(!this.locationManager.existLocation(name)) {
                     player.sendMessage(this.lobbySystem.getPrefix()
-                            .append(Component.translatable("command.lobbysystem.remove.invalid.name", NamedTextColor.RED)));
+                            .append(Component.translatable("command.lobbysystem.remove.invalid.name")));
                     return true;
                 }
 
                 this.locationManager.removeLocation(name);
                 player.sendMessage(this.lobbySystem.getPrefix()
-                        .append(Component.translatable("command.lobbysystem.remove", NamedTextColor.GRAY)
-                                .arguments(Component.text(name, this.lobbySystem.getColor()))));
+                        .append(Component.translatable("command.lobbysystem.remove", NamedTextColor.YELLOW)
+                                .arguments(Component.text(name))));
             }
 
             case "teleport", "tp" -> {
@@ -85,19 +85,19 @@ public class LobbySystemCommand implements CommandExecutor, TabCompleter {
 
                 if(!this.locationManager.existLocation(name)) {
                     player.sendMessage(this.lobbySystem.getPrefix()
-                            .append(Component.translatable("command.lobbysystem.teleport.invalid.name", NamedTextColor.RED)));
+                            .append(Component.translatable("command.lobbysystem.teleport.invalid.name")));
                     return true;
                 }
 
                 Location location = this.locationManager.getLocation(name);
                 player.teleport(location);
                 player.sendMessage(this.lobbySystem.getPrefix()
-                        .append(Component.translatable("command.lobbysystem.teleport", NamedTextColor.GRAY)
-                                .arguments(Component.text(name, this.lobbySystem.getColor()))));
+                        .append(Component.translatable("command.lobbysystem.teleport", NamedTextColor.YELLOW)
+                                .arguments(Component.text(name))));
             }
 
             default -> player.sendMessage(this.lobbySystem.getPrefix()
-                    .append(Component.translatable("command.lobbysystem.invalid.usages", NamedTextColor.WHITE)));
+                    .append(Component.translatable("command.lobbysystem.invalid.usages")));
         }
         return true;
     }

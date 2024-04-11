@@ -33,7 +33,7 @@ public class BuildCommand implements CommandExecutor, TabCompleter {
 
         if(!player.hasPermission("lobbysystem.command.build")) {
             player.sendMessage(this.lobbySystem.getPrefix()
-                    .append(Component.translatable("command.build.invalid.permission", NamedTextColor.RED)));
+                    .append(Component.translatable("command.build.invalid.permission")));
             return true;
         }
 
@@ -42,7 +42,7 @@ public class BuildCommand implements CommandExecutor, TabCompleter {
 
             if(target == null) {
                 player.sendMessage(this.lobbySystem.getPrefix()
-                        .append(Component.translatable("command.build.invalid.player", NamedTextColor.RED)));
+                        .append(Component.translatable("command.build.invalid.player")));
                 return true;
             }
 
@@ -51,10 +51,10 @@ public class BuildCommand implements CommandExecutor, TabCompleter {
                 target.getInventory().clear();
                 target.setGameMode(GameMode.CREATIVE);
                 target.sendMessage(this.lobbySystem.getPrefix()
-                        .append(Component.translatable("command.build.activated", NamedTextColor.GREEN)));
+                        .append(Component.translatable("command.build.activated")));
                 player.sendMessage(this.lobbySystem.getPrefix()
-                        .append(Component.translatable("command.build.activate.other", NamedTextColor.GRAY)
-                                .arguments(Component.text(target.getName(), NamedTextColor.GREEN))));
+                        .append(Component.translatable("command.build.activate.other")
+                                .arguments(Component.text(target.getName()))));
                 return true;
             }
 
@@ -62,10 +62,10 @@ public class BuildCommand implements CommandExecutor, TabCompleter {
             target.setGameMode(GameMode.ADVENTURE);
             this.lobbySystem.getLobbyManager().addLobbyItems(target);
             target.sendMessage(this.lobbySystem.getPrefix()
-                    .append(Component.translatable("command.build.deactivated", NamedTextColor.GREEN)));
+                    .append(Component.translatable("command.build.deactivated")));
             player.sendMessage(this.lobbySystem.getPrefix()
-                    .append(Component.translatable("command.build.deactivate.other", NamedTextColor.GRAY)
-                            .arguments(Component.text(target.getName(), NamedTextColor.RED))));
+                    .append(Component.translatable("command.build.deactivate.other")
+                            .arguments(Component.text(target.getName()))));
             return true;
         }
 
@@ -74,7 +74,7 @@ public class BuildCommand implements CommandExecutor, TabCompleter {
             player.getInventory().clear();
             player.setGameMode(GameMode.CREATIVE);
             player.sendMessage(this.lobbySystem.getPrefix()
-                    .append(Component.translatable("command.build.activate", NamedTextColor.GREEN)));
+                    .append(Component.translatable("command.build.activate")));
             return true;
         }
 
@@ -82,7 +82,7 @@ public class BuildCommand implements CommandExecutor, TabCompleter {
         player.setGameMode(GameMode.ADVENTURE);
         this.lobbySystem.getLobbyManager().addLobbyItems(player);
         player.sendMessage(this.lobbySystem.getPrefix()
-                .append(Component.translatable("command.build.deactivate", NamedTextColor.GREEN)));
+                .append(Component.translatable("command.build.deactivate")));
         return true;
     }
 

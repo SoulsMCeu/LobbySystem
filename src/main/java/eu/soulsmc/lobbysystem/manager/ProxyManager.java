@@ -71,7 +71,7 @@ public class ProxyManager implements PluginMessageListener {
             String serverName = this.getServer(player);
             if(server.equalsIgnoreCase(serverName)) {
                 player.sendMessage(this.lobbySystem.getPrefix()
-                        .append(Component.translatable("lobby.lobby-switcher.already-on-server", NamedTextColor.RED)));
+                        .append(Component.translatable("lobby.lobby-switcher.already-on-server")));
                 player.playSound(player.getLocation(), Sound.ENTITY_CHICKEN_EGG, 2.0f, 1.0f);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 30, 30));
                 player.closeInventory();

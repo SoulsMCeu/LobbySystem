@@ -14,9 +14,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ItemsManager {
 
     private final LobbySystem lobbySystem;
@@ -29,7 +26,7 @@ public class ItemsManager {
         Inventory inventory = this.lobbySystem.getServer().createInventory(null, 9 * 3, GlobalTranslator.render(
                 this.getNavigatorTitle(), player.locale()));
 
-        for(int i = 0; i < inventory.getSize(); i++) {
+        for (int i = 0; i < inventory.getSize(); i++) {
             inventory.setItem(i, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).setDisplayName(Component.empty()).build());
         }
 
@@ -38,7 +35,7 @@ public class ItemsManager {
                         .decoration(TextDecoration.ITALIC, false)).build());
         inventory.setItem(3, new ItemBuilder(Material.TNT)
                 .setDisplayName(Component.text("TNTRun", NamedTextColor.RED)
-                .decoration(TextDecoration.ITALIC, false)).build());
+                        .decoration(TextDecoration.ITALIC, false)).build());
         inventory.setItem(5, new ItemBuilder(Material.STICK)
                 .setDisplayName(Component.text("TTT", NamedTextColor.RED)
                         .decoration(TextDecoration.ITALIC, false)).build());
@@ -58,16 +55,20 @@ public class ItemsManager {
                 .setDisplayName(Component.text("MLGRush", NamedTextColor.RED)
                         .decoration(TextDecoration.ITALIC, false)).build());
 
-        if(player.hasPermission("lobby.build.server")) {
+        if (player.hasPermission("lobby.build.server")) {
             inventory.setItem(8, new ItemBuilder(Material.GRASS_BLOCK)
-                    .setDisplayName(Component.text("BauServer", NamedTextColor.RED)
-                            .decoration(TextDecoration.ITALIC, false)).build());
+                    .setDisplayName(GlobalTranslator.render(
+                                    Component.translatable("lobby.inventory.navigator.server.buildserver"), player.locale())
+                            .decoration(TextDecoration.ITALIC, false))
+                    .build());
         }
 
-        if(player.hasPermission("lobby.dev.server")) {
+        if (player.hasPermission("lobby.dev.server")) {
             inventory.setItem(26, new ItemBuilder(Material.COMMAND_BLOCK)
-                    .setDisplayName(Component.text("DevServer", NamedTextColor.RED)
-                            .decoration(TextDecoration.ITALIC, false)).build());
+                    .setDisplayName(GlobalTranslator.render(
+                                    Component.translatable("lobby.inventory.navigator.server.developerserver"), player.locale())
+                            .decoration(TextDecoration.ITALIC, false))
+                    .build());
         }
 
         return inventory;
@@ -77,30 +78,30 @@ public class ItemsManager {
         Inventory inventory = this.lobbySystem.getServer().createInventory(null, 9 * 3, GlobalTranslator.render(
                 this.getLobbySwitcherTitle(), player.locale()));
 
-        for(int i = 0; i < inventory.getSize(); i++) {
+        for (int i = 0; i < inventory.getSize(); i++) {
             inventory.setItem(i, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).setDisplayName(Component.empty()).build());
         }
 
         inventory.setItem(10, new ItemBuilder(Material.GLOWSTONE_DUST)
                 .setDisplayName(Component.text(this.lobbySystem.getConfiguration().getConfig()
-                        .getString("Server" + "." + "Lobby1"), NamedTextColor.RED)
+                                .getString("Server" + "." + "Lobby1"), NamedTextColor.RED)
                         .decoration(TextDecoration.ITALIC, false)).build());
         inventory.setItem(11, new ItemBuilder(Material.GLOWSTONE_DUST)
                 .setDisplayName(Component.text(this.lobbySystem.getConfiguration().getConfig()
-                        .getString("Server" + "." + "Lobby2"), NamedTextColor.RED)
+                                .getString("Server" + "." + "Lobby2"), NamedTextColor.RED)
                         .decoration(TextDecoration.ITALIC, false)).build());
 
-        if(player.hasPermission("lobbysystem.server.silentlobby")) {
+        if (player.hasPermission("lobbysystem.server.silentlobby")) {
             inventory.setItem(13, new ItemBuilder(Material.TNT)
                     .setDisplayName(Component.text(this.lobbySystem.getConfiguration().getConfig()
-                            .getString("Server" + "." + "SilentLobby1"), NamedTextColor.RED)
+                                    .getString("Server" + "." + "SilentLobby1"), NamedTextColor.RED)
                             .decoration(TextDecoration.ITALIC, false)).build());
         }
 
-        if(player.hasPermission("lobbysystem.server.premiumlobby")) {
+        if (player.hasPermission("lobbysystem.server.premiumlobby")) {
             inventory.setItem(16, new ItemBuilder(Material.GOLD_BLOCK)
                     .setDisplayName(Component.text(this.lobbySystem.getConfiguration().getConfig()
-                            .getString("Server" + "." + "PremiumLobby1"), NamedTextColor.RED)
+                                    .getString("Server" + "." + "PremiumLobby1"), NamedTextColor.RED)
                             .decoration(TextDecoration.ITALIC, false)).build());
         }
 
@@ -111,20 +112,20 @@ public class ItemsManager {
         Inventory inventory = this.lobbySystem.getServer().createInventory(null, 9 * 3, GlobalTranslator.render(
                 this.getProfileTitle(), player.locale()));
 
-        for(int i = 0; i < inventory.getSize(); i++) {
+        for (int i = 0; i < inventory.getSize(); i++) {
             inventory.setItem(i, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).setDisplayName(Component.empty()).build());
         }
 
         inventory.setItem(12, new ItemBuilder(Material.PLAYER_HEAD)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                        "lobby.inventory.profile.friends.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.friends.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .setSkullOwner(player)
                 .build());
 
         inventory.setItem(14, new ItemBuilder(Material.ENDER_CHEST)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                "lobby.inventory.profile.extras.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.extras.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .build());
         return inventory;
@@ -134,42 +135,42 @@ public class ItemsManager {
         Inventory inventory = this.lobbySystem.getServer().createInventory(null, 9 * 3, GlobalTranslator.render(
                 this.getExtrasTitle(), player.locale()));
 
-        for(int i = 0; i < inventory.getSize(); i++) {
+        for (int i = 0; i < inventory.getSize(); i++) {
             inventory.setItem(i, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).setDisplayName(Component.empty()).build());
         }
 
         inventory.setItem(11, new ItemBuilder(Material.DIAMOND_BOOTS)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                        "lobby.inventory.profile.extras.boots.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.extras.boots.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .addItemFlags(ItemFlag.values())
                 .build());
 
         inventory.setItem(13, new ItemBuilder(Material.CARVED_PUMPKIN)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                "lobby.inventory.profile.extras.heads.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.extras.heads.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .addItemFlags(ItemFlag.values())
                 .build());
 
         inventory.setItem(15, new ItemBuilder(Material.REDSTONE_BLOCK)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                "lobby.inventory.profile.extras.gadgets.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.extras.gadgets.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .addItemFlags(ItemFlag.values())
                 .build());
 
         inventory.setItem(18, new ItemBuilder(Material.ARROW)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                "lobby.inventory.profile.extras.back.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.extras.back.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .build());
 
-        if(player.getInventory().getHelmet() != null || player.getInventory().getBoots() != null
+        if (player.getInventory().getHelmet() != null || player.getInventory().getBoots() != null
                 && this.hasTeamBoots(player) || player.getInventory().getItem(2).getType().equals(Material.FISHING_ROD)) {
             inventory.setItem(26, new ItemBuilder(Material.BARRIER)
                     .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                    "lobby.inventory.profile.extras.reset.displayname", NamedTextColor.RED)
+                                    "lobby.inventory.profile.extras.reset.displayname")
                             .decoration(TextDecoration.ITALIC, false), player.locale()))
                     .addItemFlags(ItemFlag.values())
                     .build());
@@ -187,13 +188,13 @@ public class ItemsManager {
         Inventory inventory = this.lobbySystem.getServer().createInventory(null, 9 * 3, GlobalTranslator.render(
                 this.getBootsTitle(), player.locale()));
 
-        for(int i = 0; i < inventory.getSize(); i++) {
+        for (int i = 0; i < inventory.getSize(); i++) {
             inventory.setItem(i, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).setDisplayName(Component.empty()).build());
         }
 
         inventory.setItem(12, new ItemBuilder(Material.LEATHER_BOOTS)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                        "lobby.inventory.profile.extras.boots.love-boots.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.extras.boots.love-boots.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .setColor(Color.fromRGB(255, 0, 0))
                 .addItemFlags(ItemFlag.values())
@@ -201,7 +202,7 @@ public class ItemsManager {
 
         inventory.setItem(13, new ItemBuilder(Material.LEATHER_BOOTS)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                "lobby.inventory.profile.extras.boots.angry-boots.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.extras.boots.angry-boots.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .setColor(Color.fromRGB(99, 99, 99))
                 .addItemFlags(ItemFlag.values())
@@ -209,7 +210,7 @@ public class ItemsManager {
 
         inventory.setItem(14, new ItemBuilder(Material.LEATHER_BOOTS)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                "lobby.inventory.profile.extras.boots.water-boots.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.extras.boots.water-boots.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .setColor(Color.fromRGB(29, 97, 83))
                 .addItemFlags(ItemFlag.values())
@@ -217,7 +218,7 @@ public class ItemsManager {
 
         inventory.setItem(18, new ItemBuilder(Material.ARROW)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                "lobby.inventory.profile.extras.back.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.extras.back.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .build());
 
@@ -228,7 +229,7 @@ public class ItemsManager {
         Inventory inventory = this.lobbySystem.getServer().createInventory(null, 9 * 3, GlobalTranslator.render(
                 this.getHeadsTitle(), player.locale()));
 
-        for(int i = 0; i < inventory.getSize(); i++) {
+        for (int i = 0; i < inventory.getSize(); i++) {
             inventory.setItem(i, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).setDisplayName(Component.empty()).build());
         }
 
@@ -269,7 +270,7 @@ public class ItemsManager {
                 .build());
         inventory.setItem(18, new ItemBuilder(Material.ARROW)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                "lobby.inventory.profile.extras.back.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.extras.back.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .build());
 
@@ -280,18 +281,18 @@ public class ItemsManager {
         Inventory inventory = this.lobbySystem.getServer().createInventory(null, 9 * 3, GlobalTranslator.render(
                 this.getGadgetsTitle(), player.locale()));
 
-        for(int i = 0; i < inventory.getSize(); i++) {
+        for (int i = 0; i < inventory.getSize(); i++) {
             inventory.setItem(i, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).setDisplayName(Component.empty()).build());
         }
 
         inventory.setItem(13, new ItemBuilder(Material.FISHING_ROD)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                "lobby.inventory.profile.extras.gadgets.rod.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.extras.gadgets.rod.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .build());
         inventory.setItem(18, new ItemBuilder(Material.ARROW)
                 .setDisplayName(GlobalTranslator.render(Component.translatable(
-                                "lobby.inventory.profile.extras.back.displayname", NamedTextColor.RED)
+                                "lobby.inventory.profile.extras.back.displayname")
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .build());
 
@@ -299,51 +300,37 @@ public class ItemsManager {
     }
 
     public Component getNavigatorTitle() {
-        return Component.translatable("lobby.inventory.prefix", this.lobbySystem.getColor())
-                .arguments(Component.text(".", NamedTextColor.DARK_GRAY), Component.text("✖",
-                        NamedTextColor.DARK_GRAY)).appendSpace().append(Component.translatable(
-                                "lobby.inventory.navigator.title", NamedTextColor.GRAY));
+        return this.lobbySystem.getItemsPrefix()
+                .append(Component.translatable("lobby.inventory.navigator.title"));
     }
 
     public Component getLobbySwitcherTitle() {
-        return Component.translatable("lobby.inventory.prefix", this.lobbySystem.getColor())
-                .arguments(Component.text(".", NamedTextColor.DARK_GRAY), Component.text("✖",
-                        NamedTextColor.DARK_GRAY)).appendSpace().append(Component.translatable(
-                        "lobby.inventory.lobby-switcher.title", NamedTextColor.GRAY));
+        return this.lobbySystem.getItemsPrefix()
+                .append(Component.translatable("lobby.inventory.lobby-switcher.title"));
     }
 
     public Component getProfileTitle() {
-        return Component.translatable("lobby.inventory.prefix", this.lobbySystem.getColor())
-                .arguments(Component.text(".", NamedTextColor.DARK_GRAY), Component.text("✖",
-                        NamedTextColor.DARK_GRAY)).appendSpace().append(Component.translatable(
-                        "lobby.inventory.profile.title", NamedTextColor.GRAY));
+        return this.lobbySystem.getItemsPrefix()
+                .append(Component.translatable("lobby.inventory.profile.title"));
     }
 
     public Component getExtrasTitle() {
-        return Component.translatable("lobby.inventory.prefix", this.lobbySystem.getColor())
-                .arguments(Component.text(".", NamedTextColor.DARK_GRAY), Component.text("✖",
-                        NamedTextColor.DARK_GRAY)).appendSpace().append(Component.translatable(
-                        "lobby.inventory.profile.extras.title", NamedTextColor.GRAY));
+        return this.lobbySystem.getItemsPrefix()
+                .append(Component.translatable("lobby.inventory.profile.extras.title"));
     }
 
     public Component getBootsTitle() {
-        return Component.translatable("lobby.inventory.prefix", this.lobbySystem.getColor())
-                .arguments(Component.text(".", NamedTextColor.DARK_GRAY), Component.text("✖",
-                        NamedTextColor.DARK_GRAY)).appendSpace().append(Component.translatable(
-                        "lobby.inventory.profile.extras.boots.title", NamedTextColor.GRAY));
+        return this.lobbySystem.getItemsPrefix()
+                .append(Component.translatable("lobby.inventory.profile.extras.boots.title"));
     }
 
     public Component getHeadsTitle() {
-        return Component.translatable("lobby.inventory.prefix", this.lobbySystem.getColor())
-                .arguments(Component.text(".", NamedTextColor.DARK_GRAY), Component.text("✖",
-                        NamedTextColor.DARK_GRAY)).appendSpace().append(Component.translatable(
-                        "lobby.inventory.profile.extras.heads.title", NamedTextColor.GRAY));
+        return this.lobbySystem.getItemsPrefix()
+                .append(Component.translatable("lobby.inventory.profile.extras.heads.title"));
     }
 
     public Component getGadgetsTitle() {
-        return Component.translatable("lobby.inventory.prefix", this.lobbySystem.getColor())
-                .arguments(Component.text(".", NamedTextColor.DARK_GRAY), Component.text("✖",
-                        NamedTextColor.DARK_GRAY)).appendSpace().append(Component.translatable(
-                        "lobby.inventory.profile.extras.gadgets.title", NamedTextColor.GRAY));
+        return this.lobbySystem.getItemsPrefix()
+                .append(Component.translatable("lobby.inventory.profile.extras.gadgets.title"));
     }
 }
