@@ -28,6 +28,12 @@ If you want to add a new language make a new file named **lobby_<youre_Language>
 | lobbysystem.server.silentlobby   | Allowed to join on the SilentLobby   |
 | lobbysystem.server.premiumlobby  | Allowed to join on the PremiumLobby  |
 
+### Items
+
+| Permission                     | Usage                       |
+|--------------------------------|-----------------------------|
+| lobbysystem.item.flightfeather | Use the feather item to fly |
+
 ## Currently Broken
 
 You tell me

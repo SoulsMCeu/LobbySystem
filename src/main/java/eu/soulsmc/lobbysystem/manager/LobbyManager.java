@@ -95,7 +95,7 @@ public class LobbyManager {
                 .setSkullOwner(player)
                 .build());
 
-        if (!player.hasPermission("lobbysystem.item.flugfeder")) {
+        if (!player.hasPermission("lobbysystem.item.flightfeather")) {
             return;
         }
 
