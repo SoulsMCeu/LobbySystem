@@ -13,12 +13,20 @@ If you want to add a new language make a new file named **lobby_<youre_Language>
 ## Permissions
 
 
-|Commands       |Permission                     |Usage              |
-|---------------|-------------------------------|-------------------|
-|/lobbysystem   |lobbysystem.command.use        |use,set,teleport,tp|
-|/build         |lobbysystem.command.build      |                   |
-|/fish          |                               |                   |
+### Commands
 
+| Commands     | Permission                | Usage               |
+|--------------|---------------------------|---------------------|
+| /lobbysystem | lobbysystem.command.use   | use,set,teleport,tp |
+| /build       | lobbysystem.command.build |                     |
+| /fish        |                           |                     |
+
+### Lobby Switcher
+
+| Permission                       | Usage                                |
+|----------------------------------|--------------------------------------|
+| lobbysystem.server.silentlobby   | Allowed to join on the SilentLobby   |
+| lobbysystem.server.premiumlobby  | Allowed to join on the PremiumLobby  |
 
 ## Currently Broken
 
