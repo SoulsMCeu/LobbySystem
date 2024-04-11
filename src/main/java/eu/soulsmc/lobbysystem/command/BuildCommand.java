@@ -53,7 +53,7 @@ public class BuildCommand implements CommandExecutor, TabCompleter {
                 target.sendMessage(this.lobbySystem.getPrefix()
                         .append(Component.translatable("command.build.activated")));
                 player.sendMessage(this.lobbySystem.getPrefix()
-                        .append(Component.translatable("command.build.activate.other")
+                        .append(Component.translatable("command.build.activate.other", NamedTextColor.YELLOW)
                                 .arguments(Component.text(target.getName()))));
                 return true;
             }
@@ -64,7 +64,7 @@ public class BuildCommand implements CommandExecutor, TabCompleter {
             target.sendMessage(this.lobbySystem.getPrefix()
                     .append(Component.translatable("command.build.deactivated")));
             player.sendMessage(this.lobbySystem.getPrefix()
-                    .append(Component.translatable("command.build.deactivate.other")
+                    .append(Component.translatable("command.build.deactivate.other", NamedTextColor.YELLOW)
                             .arguments(Component.text(target.getName()))));
             return true;
         }
