@@ -54,8 +54,11 @@ public class LobbyManager {
         player.setHealth(20.0);
         player.setFoodLevel(20);
 
-        player.setLevel(Year.now().getValue());
-        player.setExp(1.0f);
+        // Schedule a task to run 5 ticks later to ensure the player's data is fully initialized
+        Bukkit.getScheduler().runTaskLater(this.lobbySystem, () -> {
+            player.setLevel(Year.now().getValue());
+            player.setExp(1.0f);
+        }, 5L);
     }
 
     public void addLobbyItems(@NotNull Player player) {
