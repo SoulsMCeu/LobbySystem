@@ -156,15 +156,15 @@ public class LobbyListeners implements Listener {
         switch (leatherArmorMeta.getColor().asRGB()) {
             case 16711680 -> {
                 Particle.DustOptions dustOptions = new Particle.DustOptions(Color.fromRGB(255, 0, 0), 1f);
-                player.spawnParticle(Particle.REDSTONE, player.getLocation(), 20, dustOptions);
+                player.spawnParticle(Particle.DUST, player.getLocation(), 20, dustOptions);
             }
             case 6513507 -> {
                 Particle.DustOptions dustOptions = new Particle.DustOptions(Color.fromRGB(99, 99, 99), 1f);
-                player.spawnParticle(Particle.REDSTONE, player.getLocation(), 20, dustOptions);
+                player.spawnParticle(Particle.DUST, player.getLocation(), 20, dustOptions);
             }
             case 1925459 -> {
                 Particle.DustOptions dustOptions = new Particle.DustOptions(Color.fromRGB(29, 97, 83), 1f);
-                player.spawnParticle(Particle.REDSTONE, player.getLocation(), 20, dustOptions);
+                player.spawnParticle(Particle.DUST, player.getLocation(), 20, dustOptions);
             }
         }
     }

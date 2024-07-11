@@ -1,6 +1,6 @@
 name: LobbySystem
 main: eu.soulsmc.lobbysystem.LobbySystem
-api-version: 1.20
+api-version: 1.21
 version: ${project.version}
 authors:
   - Lvcq_
