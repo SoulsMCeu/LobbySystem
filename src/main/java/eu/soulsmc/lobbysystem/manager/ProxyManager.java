@@ -13,7 +13,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -97,13 +96,7 @@ public class ProxyManager implements PluginMessageListener {
     }
 
     public String getServer(@NotNull Player player) {
-        // Temporary fix to get Server names in Velocity
-        String rootFolderName = new File("../").getAbsoluteFile().getParentFile().getName();
-        String serverName = switch (rootFolderName) {
-            case "lobby1", "lobby2", "silentlobby1", "premiumlobby1" -> rootFolderName;
-            default -> "None";
-        };
-        return this.playerServer.getOrDefault(player.getName(), serverName);
+        return this.playerServer.getOrDefault(player.getName(), "None");
     }
 
     public boolean isServerOnline(@NotNull String server) {
