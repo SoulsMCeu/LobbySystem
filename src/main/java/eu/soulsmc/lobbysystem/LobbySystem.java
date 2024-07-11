@@ -104,10 +104,13 @@ public class LobbySystem extends JavaPlugin {
 
     private void registerTranslation() {
         TranslationRegistry registry = TranslationRegistry.create(Key.key("lobby:localization"));
-
         for (Locale locale : Locale.getAvailableLocales()) {
-            ResourceBundle bundle = ResourceBundle.getBundle("lobby", locale, UTF8ResourceBundleControl.get());
-            registry.registerAll(locale, bundle, false);
+            try {
+                ResourceBundle bundle = ResourceBundle.getBundle("lobby", locale, UTF8ResourceBundleControl.get());
+                registry.registerAll(locale, bundle, false);
+            } catch (Exception ignored) {
+                // Ignored
+            }
         }
 
         GlobalTranslator.translator().addSource(registry);
