@@ -239,6 +239,7 @@ public class LobbyListeners implements Listener {
             case STICK -> this.teleportPlayer(player, "TTT");
             case FISHING_ROD -> this.teleportPlayer(player, "KnockIT");
             case BLAZE_ROD -> this.teleportPlayer(player, "MLGRush");
+            case MOSS_BLOCK -> this.teleportPlayer(player, "CityBuild");
             case SLIME_BALL -> this.teleportPlayer(player,  "Jump&Run");
             case COMMAND_BLOCK -> this.lobbySystem.getProxyManager().connect(player, this.lobbySystem.getConfiguration()
                     .getConfig().getString("Server" + "." + "DevServer"));

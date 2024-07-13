@@ -48,6 +48,9 @@ public class ItemsManager {
         inventory.setItem(15, new ItemBuilder(Material.RED_BED)
                 .setDisplayName(Component.text("BedWars", NamedTextColor.RED)
                         .decoration(TextDecoration.ITALIC, false)).build());
+        inventory.setItem(18, new ItemBuilder(Material.MOSS_BLOCK)
+                .setDisplayName(Component.text("CityBuild", NamedTextColor.RED)
+                        .decoration(TextDecoration.ITALIC, false)).build());
         inventory.setItem(21, new ItemBuilder(Material.FISHING_ROD)
                 .setDisplayName(Component.text("KnockIT", NamedTextColor.RED)
                         .decoration(TextDecoration.ITALIC, false)).build());
