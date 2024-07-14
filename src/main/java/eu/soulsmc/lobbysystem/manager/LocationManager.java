@@ -3,7 +3,6 @@ package eu.soulsmc.lobbysystem.manager;
 import eu.soulsmc.lobbysystem.LobbySystem;
 import eu.soulsmc.lobbysystem.util.Config;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 
@@ -61,6 +60,6 @@ public class LocationManager {
     }
 
     public List<String> getSpawnLocations() {
-       return Stream.of("Spawn", "GunGame", "Bedwars", "TNTRun", "TTT", "KnockIT", "MLGRush", "Jump&Run").toList();
+       return Stream.of("Spawn", "CityBuild", "GunGame", "Bedwars", "TNTRun", "TTT", "KnockIT", "MLGRush", "Jump&Run").toList();
     }
 }
