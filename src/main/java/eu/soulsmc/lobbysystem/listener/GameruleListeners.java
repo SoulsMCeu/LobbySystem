@@ -8,6 +8,7 @@ import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -101,11 +102,13 @@ public class GameruleListeners implements Listener {
             return;
         }
 
-        if(event.getItem() != null && event.getItem().getType().equals(Material.FISHING_ROD)) {
+        if(event.getItem() != null && event.getItem().getType().equals(Material.FISHING_ROD)
+                && event.getAction() == Action.RIGHT_CLICK_AIR) {
             return;
         }
 
-        if(event.getItem() != null && event.getItem().getType().equals(Material.ENDER_PEARL)) {
+        if(event.getItem() != null && event.getItem().getType().equals(Material.ENDER_PEARL)
+                && event.getAction() == Action.RIGHT_CLICK_AIR) {
             return;
         }
 
