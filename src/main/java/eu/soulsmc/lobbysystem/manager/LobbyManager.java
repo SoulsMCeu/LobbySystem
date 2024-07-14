@@ -101,6 +101,8 @@ public class LobbyManager {
                 .setSkullOwner(player)
                 .build());
 
+        this.setRankBoots(player);
+
         if (!player.hasPermission("lobbysystem.item.flightfeather")) {
             return;
         }
@@ -111,8 +113,6 @@ public class LobbyManager {
                                         NamedTextColor.GRAY)
                         .decoration(TextDecoration.ITALIC, false)), player.locale()))
                 .build());
-
-        this.setRankBoots(player);
     }
 
     private void setRankBoots(@NotNull Player player) {
