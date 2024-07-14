@@ -13,6 +13,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class ItemsManager {
 
     private final LobbySystem lobbySystem;
@@ -72,6 +74,40 @@ public class ItemsManager {
                             .decoration(TextDecoration.ITALIC, false))
                     .build());
         }
+
+        return inventory;
+    }
+
+    public Inventory cityBuildInventory(@NotNull Player player) {
+        Inventory inventory = this.lobbySystem.getServer().createInventory(null, 9 * 3,
+                this.getCityBuildTitle());
+
+        for (int i = 0; i < inventory.getSize(); i++) {
+            inventory.setItem(i, new ItemBuilder(Material.GRAY_STAINED_GLASS_PANE).setDisplayName(Component.empty()).build());
+        }
+
+        List<String> cbServers = this.lobbySystem.getProxyManager().getServers().stream()
+                .filter(serverName -> serverName.startsWith("cb"))
+                .toList();
+
+        int slot = 11;
+        for (String cbServer : cbServers) {
+            if (slot >= inventory.getSize()) {
+                break;
+            }
+
+            inventory.setItem(slot, new ItemBuilder(Material.MOSS_BLOCK)
+                    .setDisplayName(Component.text(cbServer, NamedTextColor.RED)
+                            .decoration(TextDecoration.ITALIC, false))
+                    .build());
+            slot++;
+        }
+
+        inventory.setItem(18, new ItemBuilder(Material.ARROW)
+                .setDisplayName(GlobalTranslator.render(Component.translatable(
+                                "lobby.inventory.profile.extras.back.displayname")
+                        .decoration(TextDecoration.ITALIC, false), player.locale()))
+                .build());
 
         return inventory;
     }
@@ -317,6 +353,11 @@ public class ItemsManager {
     public Component getNavigatorTitle() {
         return this.lobbySystem.getItemsPrefix()
                 .append(Component.translatable("lobby.inventory.navigator.title"));
+    }
+
+    public Component getCityBuildTitle() {
+        return this.lobbySystem.getItemsPrefix()
+                .append(Component.text("CityBuild Server"));
     }
 
     public Component getLobbySwitcherTitle() {

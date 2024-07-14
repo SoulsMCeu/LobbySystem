@@ -245,7 +245,7 @@ public class LobbyListeners implements Listener {
             case STICK -> this.teleportPlayer(player, "TTT");
             case FISHING_ROD -> this.teleportPlayer(player, "KnockIT");
             case BLAZE_ROD -> this.teleportPlayer(player, "MLGRush");
-            case MOSS_BLOCK -> this.teleportPlayer(player, "CityBuild");
+            case MOSS_BLOCK -> player.openInventory(this.lobbySystem.getItemsManager().cityBuildInventory(player));
             case SLIME_BALL -> this.teleportPlayer(player,  "Jump&Run");
             case COMMAND_BLOCK -> this.lobbySystem.getProxyManager().connect(player, this.lobbySystem.getConfiguration()
                     .getConfig().getString("Server" + "." + "DevServer"));
@@ -267,6 +267,47 @@ public class LobbyListeners implements Listener {
         player.playEffect(player.getLocation(), Effect.ENDER_SIGNAL, 1);
         player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 2.0f, 1.0f);
         player.closeInventory();
+    }
+
+    @EventHandler
+    public void onCityBuild(@NotNull InventoryClickEvent event) {
+        if(!(event.getWhoClicked() instanceof Player player)) {
+            return;
+        }
+
+        if(event.getClickedInventory() == null) {
+            return;
+        }
+
+        String title = LegacyComponentSerializer.legacySection().serialize(event.getView().title());
+        String inventoryTitle =
+                LegacyComponentSerializer.legacySection().serialize(this.itemsManager.getCityBuildTitle());
+
+        if (!inventoryTitle.equals(title)) {
+            return;
+        }
+
+        event.setCancelled(true);
+
+        ItemStack itemStack = event.getCurrentItem();
+
+        if(itemStack == null) {
+            return;
+        }
+
+        if(itemStack.getType().equals(Material.AIR)) {
+            return;
+        }
+
+        if(itemStack.getType().equals(Material.GRAY_STAINED_GLASS_PANE)) {
+            return;
+        }
+
+        String displayName = itemStack.getItemMeta().getDisplayName();
+        switch (itemStack.getType()) {
+            case ARROW -> player.openInventory(this.lobbySystem.getItemsManager().navigatorInventory(player));
+            case MOSS_BLOCK -> this.lobbySystem.getProxyManager().connect(player, displayName.replace("§c", ""));
+        }
     }
 
     @EventHandler

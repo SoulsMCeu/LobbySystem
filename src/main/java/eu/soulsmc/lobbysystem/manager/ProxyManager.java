@@ -5,7 +5,6 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import eu.soulsmc.lobbysystem.LobbySystem;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
@@ -13,19 +12,20 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ProxyManager implements PluginMessageListener {
 
     private final LobbySystem lobbySystem;
     private final Map<String, String> playerServer;
     private final Map<String, Boolean> serverStatus;
+    private final List<String> serverList;
 
     public ProxyManager(@NotNull LobbySystem lobbySystem) {
         this.lobbySystem = lobbySystem;
         this.playerServer = new HashMap<>();
         this.serverStatus = new HashMap<>();
+        this.serverList = new ArrayList<>();
     }
 
     @Override
@@ -53,6 +53,12 @@ public class ProxyManager implements PluginMessageListener {
             }
 
             this.serverStatus.put(serverName, false);
+        }
+
+        if (subChannel.equals("GetServers")) {
+            String[] servers = input.readUTF().split(", ");
+            this.serverList.clear();
+            this.serverList.addAll(Arrays.asList(servers));
         }
     }
 
@@ -97,6 +103,13 @@ public class ProxyManager implements PluginMessageListener {
 
     public String getServer(@NotNull Player player) {
         return this.playerServer.getOrDefault(player.getName(), "None");
+    }
+
+    public List<String> getServers() {
+        ByteArrayDataOutput byteArrayDataOutput = ByteStreams.newDataOutput();
+        byteArrayDataOutput.writeUTF("GetServers");
+        this.lobbySystem.getServer().sendPluginMessage(this.lobbySystem, "BungeeCord", byteArrayDataOutput.toByteArray());
+        return this.serverList;
     }
 
     public boolean isServerOnline(@NotNull String server) {
