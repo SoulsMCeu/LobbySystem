@@ -1,11 +1,14 @@
 package eu.soulsmc.lobbysystem.manager;
 
 import eu.soulsmc.lobbysystem.LobbySystem;
+import eu.soulsmc.lobbysystem.util.ColorCodeTranslator;
 import eu.soulsmc.lobbysystem.util.ItemBuilder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.translation.GlobalTranslator;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.model.user.User;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
@@ -109,35 +112,26 @@ public class LobbyManager {
                         .decoration(TextDecoration.ITALIC, false)), player.locale()))
                 .build());
 
-        this.setTeamBoots(player);
+        this.setRankBoots(player);
     }
 
-    private void setTeamBoots(@NotNull Player player) {
-        int[] color = getTeamBootsColor(player);
-        player.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS)
-                .setDisplayName(
-                        GlobalTranslator.render(
-                                Component.text(this.getRank(player, true))
-                                        .appendSpace()
-                                        .append(Component
-                                                .translatable("lobby.inventory.boots.displayname")),
-                                player.locale()))
-                .setColor(Color.fromRGB(color[0], color[1], color[2]))
-                .addItemFlags(ItemFlag.values())
-                .build());
-    }
+    private void setRankBoots(@NotNull Player player) {
+        String groupColored = getGroupColored(player);
+        char colorCode = groupColored.charAt(1);
+        Color color = ColorCodeTranslator.toRGB(colorCode);
 
-    public int[] getTeamBootsColor(@NotNull Player player) {
-        final Map<String, int[]> rankColors = new HashMap<>();
-        rankColors.put("Inhaber", new int[]{170, 0, 0});
-        rankColors.put("Admin", new int[]{170, 0, 0});
-        rankColors.put("Developer", new int[]{85, 255, 255});
-        rankColors.put("Moderator", new int[]{255, 255, 75});
-        rankColors.put("Supporter", new int[]{85, 255, 85});
-        rankColors.put("Builder", new int[]{85, 255, 85});
-        rankColors.put("Azubi", new int[]{0, 170, 170});
-
-        return rankColors.get(getRank(player, false));
+        if (player.hasPermission("lobbysystem.item.rankboots")) {
+            player.getInventory().setBoots(new ItemBuilder(Material.LEATHER_BOOTS)
+                    .setDisplayName(
+                            GlobalTranslator.render(
+                                    Component.text(groupColored)
+                                            .appendSpace()
+                                            .append(Component.translatable("lobby.inventory.boots.displayname")),
+                                    player.locale()))
+                    .setColor(color)
+                    .addItemFlags(ItemFlag.values())
+                    .build());
+        }
     }
 
     public void toggleFlyMode(@NotNull Player player) {
@@ -192,33 +186,29 @@ public class LobbyManager {
         }, 10 * 20L, 10 * 20L);
     }
 
-    public String getRank(Player player, boolean color) {
-        String[][] ranks = {
-                {"group.inhaber", "§4Inhaber"},
-                {"group.admin", "§4Admin"},
-                {"group.srdeveloper", "§bSrDeveloper"},
-                {"group.developer", "§bDeveloper"},
-                {"group.srmoderator", "§cSrModerator"},
-                {"group.moderator", "§cModerator"},
-                {"group.supporter", "§9Supporter"},
-                {"group.builder", "§eBuilder"},
-                {"group.azubi", "§3Azubi"},
-                {"group.freund", "§aFreund"},
-                {"group.youtube", "§5YouTube"},
-                {"group.premiumplus", "§ePremium§a+"},
-                {"group.iron", "§fIron"},
-                {"group.premium", "§6Premium"},
-                {"group.default", "§7Spieler"}
-        };
-
-        for (String[] rank : ranks) {
-            if (player.hasPermission(rank[0])) {
-                return color ? rank[1] : rank[1].substring(2);
-            }
-        }
-
-        return color ? "§7Spieler" : "Spieler";
+    // LuckPerms
+    private User getUser(Player player) {
+        LuckPerms luckPerms = this.lobbySystem.getLuckPerms();
+        return luckPerms.getPlayerAdapter(Player.class).getUser(player);
     }
+
+    public String getGroup(Player player) {
+        User user = getUser(player);
+        return user.getCachedData().getMetaData().getPrimaryGroup();
+    }
+
+    public String getGroupColored(Player player) {
+        String prefix = getPrefix(player);
+        String[] parts = prefix.split(" ", 2);
+        return parts[0].replace("&", "§");
+    }
+
+    public String getPrefix(Player player) {
+        User user = getUser(player);
+        return user.getCachedData().getMetaData().getPrefix() != null ?
+                user.getCachedData().getMetaData().getPrefix() : "No Prefix";
+    }
+    // LuckPerms end
 
     public List<UUID> getFlyList() {
         return flyList;

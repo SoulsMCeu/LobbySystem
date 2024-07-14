@@ -11,7 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 
 public class ItemsManager {
@@ -170,7 +169,7 @@ public class ItemsManager {
                 .build());
 
         if (player.getInventory().getHelmet() != null || player.getInventory().getBoots() != null
-                && this.hasTeamBoots(player) || player.getInventory().getItem(2).getType().equals(Material.FISHING_ROD)
+                && !player.hasPermission("lobbysystem.item.rankboots") || player.getInventory().getItem(2).getType().equals(Material.FISHING_ROD)
         || player.getInventory().getItem(2).getType().equals(Material.ENDER_PEARL)) {
             inventory.setItem(26, new ItemBuilder(Material.BARRIER)
                     .setDisplayName(GlobalTranslator.render(Component.translatable(
@@ -182,11 +181,6 @@ public class ItemsManager {
         return inventory;
     }
 
-    private boolean hasTeamBoots(@NotNull Player player) {
-        int[] color = this.lobbySystem.getLobbyManager().getTeamBootsColor(player);
-        LeatherArmorMeta leatherMeta = (LeatherArmorMeta) player.getInventory().getBoots().getItemMeta();
-        return !leatherMeta.getColor().equals(Color.fromRGB(color[0], color[1], color[2]));
-    }
 
     public Inventory bootsInventory(@NotNull Player player) {
         Inventory inventory = this.lobbySystem.getServer().createInventory(null, 9 * 3, GlobalTranslator.render(

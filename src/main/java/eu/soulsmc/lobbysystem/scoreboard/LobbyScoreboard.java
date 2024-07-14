@@ -23,8 +23,7 @@ public class LobbyScoreboard extends ScoreboardBuilder {
             this.setScore(GlobalTranslator.render(Component.translatable(
                     "lobby.scoreboard.score.your.rank"), player.locale()),11);
             this.setScore(Component.text(" »", NamedTextColor.DARK_GRAY)
-                    .appendSpace().append(Component.text(this.lobbySystem.getLobbyManager()
-                            .getRank(player, true))), 10);
+                    .appendSpace().append(Component.text(this.lobbySystem.getLobbyManager().getGroupColored(player))), 10);
             this.setScore(Component.text(ChatColor.DARK_GREEN.toString()), 9);
             this.setScore(GlobalTranslator.render(Component.translatable(
                     "lobby.scoreboard.score.lobby"), player.locale()),8);

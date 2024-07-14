@@ -16,6 +16,8 @@ import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.translation.GlobalTranslator;
 import net.kyori.adventure.translation.TranslationRegistry;
 import net.kyori.adventure.util.UTF8ResourceBundleControl;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +32,8 @@ public class LobbySystem extends JavaPlugin {
     private LocationManager locationManager;
     private ProxyManager proxyManager;
     private Config config;
+
+    private LuckPerms luckPerms;
 
     @Override
     public void onLoad() {
@@ -46,6 +50,14 @@ public class LobbySystem extends JavaPlugin {
         this.locationManager = new LocationManager(this);
         this.proxyManager = new ProxyManager(this);
         this.itemsManager = new ItemsManager(this);
+
+        try {
+            luckPerms = LuckPermsProvider.get();
+            getLogger().info("LuckPermsAPI is working!");
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+            getLogger().severe("Please install LuckPerms to get working Prefixes!");
+        }
 
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this.proxyManager);
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
@@ -100,6 +112,11 @@ public class LobbySystem extends JavaPlugin {
     @NotNull
     public ItemsManager getItemsManager() {
         return itemsManager;
+    }
+
+    @NotNull
+    public LuckPerms getLuckPerms() {
+        return luckPerms;
     }
 
     private void registerTranslation() {

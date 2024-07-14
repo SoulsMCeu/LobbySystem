@@ -34,6 +34,8 @@ To add a new language, create a new file named `lobby_<your_language>.properties
 | Permission                       | Usage                       |
 |----------------------------------|-----------------------------|
 | `lobbysystem.item.flightfeather` | Use the feather item to fly |
+| `lobbysystem.item.rankboots`     | Set boots for specific rank |
+
 
 ## Known Issues
 
