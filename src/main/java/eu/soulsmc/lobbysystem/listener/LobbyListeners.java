@@ -82,6 +82,12 @@ public class LobbyListeners implements Listener {
     public void onMove(@NotNull PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
+        double respawnHeight = Double.parseDouble(
+                this.lobbySystem.getConfiguration().getConfig().getString("Locations.RespawnHeight"));
+        if (player.getLocation().getY() <= respawnHeight) {
+            player.teleport(this.lobbySystem.getLocationManager().getLocation("Spawn"));
+        }
+
         if(player.getGameMode().equals(GameMode.CREATIVE)) {
             return;
         }

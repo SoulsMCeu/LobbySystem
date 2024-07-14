@@ -43,6 +43,7 @@ public class Config {
         this.addDefault("Server" + "." + "Lobby2", "lobby2");
         this.addDefault("Server" + "." + "PremiumLobby1", "premiumlobby1");
         this.addDefault("Server" + "." + "SilentLobby1", "silentlobby1");
+        this.addDefault("Locations" + "." + "RespawnHeight", 70);
     }
 
     private void addDefault(String path, Object value) {
