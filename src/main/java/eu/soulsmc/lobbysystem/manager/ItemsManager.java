@@ -57,7 +57,7 @@ public class ItemsManager {
                 .setDisplayName(Component.text("MLGRush", NamedTextColor.RED)
                         .decoration(TextDecoration.ITALIC, false)).build());
 
-        if (player.hasPermission("lobby.build.server")) {
+        if (player.hasPermission("lobbysystem.server.buildserver")) {
             inventory.setItem(8, new ItemBuilder(Material.GRASS_BLOCK)
                     .setDisplayName(GlobalTranslator.render(
                                     Component.translatable("lobby.inventory.navigator.server.buildserver"), player.locale())
@@ -65,7 +65,7 @@ public class ItemsManager {
                     .build());
         }
 
-        if (player.hasPermission("lobby.dev.server")) {
+        if (player.hasPermission("lobbysystem.server.developerserver")) {
             inventory.setItem(26, new ItemBuilder(Material.COMMAND_BLOCK)
                     .setDisplayName(GlobalTranslator.render(
                                     Component.translatable("lobby.inventory.navigator.server.developerserver"), player.locale())

@@ -24,10 +24,12 @@ To add a new language, create a new file named `lobby_<your_language>.properties
 
 ### Lobby Switcher
 
-| Permission                        | Usage                                |
-|-----------------------------------|--------------------------------------|
-| `lobbysystem.server.silentlobby`  | Allowed to join the SilentLobby      |
-| `lobbysystem.server.premiumlobby` | Allowed to join the PremiumLobby     |
+| Permission                           | Usage                               |
+|--------------------------------------|-------------------------------------|
+| `lobbysystem.server.silentlobby`     | Allowed to join the SilentLobby     |
+| `lobbysystem.server.premiumlobby`    | Allowed to join the PremiumLobby    |
+| `lobbysystem.server.buildserver`     | Allowed to join the BuildServer     |
+| `lobbysystem.server.developerserver` | Allowed to join the DeveloperServer |
 
 ### Items
 
