@@ -168,9 +168,10 @@ public class ItemsManager {
                         .decoration(TextDecoration.ITALIC, false), player.locale()))
                 .build());
 
-        if (player.getInventory().getHelmet() != null || player.getInventory().getBoots() != null
-                && !player.hasPermission("lobbysystem.item.rankboots") || player.getInventory().getItem(2).getType().equals(Material.FISHING_ROD)
-        || player.getInventory().getItem(2).getType().equals(Material.ENDER_PEARL)) {
+        if (player.getInventory().getHelmet() != null || (player.getInventory().getBoots() != null
+                && this.hasRankBoots(player))
+                || player.getInventory().getItem(2).getType().equals(Material.FISHING_ROD)
+                || player.getInventory().getItem(2).getType().equals(Material.ENDER_PEARL)) {
             inventory.setItem(26, new ItemBuilder(Material.BARRIER)
                     .setDisplayName(GlobalTranslator.render(Component.translatable(
                                     "lobby.inventory.profile.extras.reset.displayname")
@@ -181,6 +182,17 @@ public class ItemsManager {
         return inventory;
     }
 
+    public boolean hasRankBoots(Player player) {
+        String groupColored = this.lobbySystem.getLobbyManager().getGroupColored(player);
+        Component rankBootsName = GlobalTranslator.render(
+                Component.text(groupColored)
+                        .append(Component.space())
+                        .append(Component.translatable("lobby.inventory.boots.displayname")),
+                player.locale()
+        );
+
+        return !rankBootsName.equals(player.getInventory().getBoots().getItemMeta().displayName());
+    }
 
     public Inventory bootsInventory(@NotNull Player player) {
         Inventory inventory = this.lobbySystem.getServer().createInventory(null, 9 * 3, GlobalTranslator.render(
