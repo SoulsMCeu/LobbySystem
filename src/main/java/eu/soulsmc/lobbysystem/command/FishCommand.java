@@ -53,7 +53,7 @@ public class FishCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
-                                                @NotNull String label, @NotNull String[] args) {
+                                                @NotNull String label, @NotNull String @NotNull [] args) {
         return Collections.emptyList();
     }
 }
