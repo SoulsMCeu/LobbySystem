@@ -26,15 +26,17 @@ public class FishCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
-                             @NotNull String label, @NotNull String[] args) {
+                             @NotNull String label, @NotNull String @NotNull [] args) {
 
         if(!(sender instanceof Player player)) {
             return true;
         }
 
-        String displayName = "§1F§2i§3s§4h";
+        Component displayName = this.lobbySystem.getItemsPrefix()
+                .append(Component.translatable("lobby.items.fish.displayname"));
+
         ItemStack itemStack = new ItemBuilder(Material.TROPICAL_FISH)
-                .setDisplayName(Component.text(displayName))
+                .setDisplayName(displayName)
                 .build();
 
         for(int i = 0; i < 36; i++) {
