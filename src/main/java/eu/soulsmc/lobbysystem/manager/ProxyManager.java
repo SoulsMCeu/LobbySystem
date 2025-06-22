@@ -29,7 +29,7 @@ public class ProxyManager implements PluginMessageListener {
     }
 
     @Override
-    public void onPluginMessageReceived(@NotNull String channel, @NotNull Player player, byte[] message) {
+    public void onPluginMessageReceived(@NotNull String channel, @NotNull Player player, byte @NotNull [] message) {
         if(!channel.equals("BungeeCord")) {
             return;
         }

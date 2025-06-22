@@ -29,7 +29,7 @@ public class LobbySystemCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
-                             @NotNull String label, @NotNull String[] args) {
+                             @NotNull String label, @NotNull String @NotNull [] args) {
 
         if(!(sender instanceof Player player)) {
             return true;
@@ -104,7 +104,7 @@ public class LobbySystemCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
-                                                @NotNull String label, @NotNull String[] args) {
+                                                @NotNull String label, @NotNull String @NotNull [] args) {
         switch (args.length) {
             case 1 -> {
                 return Stream.of("set", "remove", "teleport", "tp").toList().stream().filter(s -> s.startsWith(args[0])).toList();

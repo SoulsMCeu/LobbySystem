@@ -25,7 +25,7 @@ public class BuildCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
-                             @NotNull String label, @NotNull String[] args) {
+                             @NotNull String label, @NotNull String @NotNull [] args) {
 
         if(!(sender instanceof Player player)) {
             return true;
