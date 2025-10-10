@@ -1,6 +1,7 @@
 name: LobbySystem
 main: eu.soulsmc.lobbysystem.LobbySystem
 api-version: 1.21
+folia-supported: true
 version: ${project.version}
 authors:
   - Lvcq_
