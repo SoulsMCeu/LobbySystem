@@ -49,8 +49,16 @@
             <artifactId>commons-io</artifactId>
             <version>2.19.0</version>
         </dependency>
+        <!--
+            commons-lang3 >=3.20.0 fixes Vulnerability CVE-2025-48924
+            See https://www.mend.io/vulnerability-database/CVE-2025-48924
+        -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.20.0</version>
+        </dependency>
     </dependencies>
-
     <build>
         <resources>
             <resource>
