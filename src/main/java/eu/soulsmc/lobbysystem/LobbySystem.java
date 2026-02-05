@@ -51,13 +51,15 @@ public class LobbySystem extends JavaPlugin {
         this.proxyManager = new ProxyManager(this);
         this.itemsManager = new ItemsManager(this);
 
-        try {
-            luckPerms = LuckPermsProvider.get();
-            getLogger().info("LuckPermsAPI is working!");
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-            getLogger().severe("Please install LuckPerms to get working Prefixes!");
+        // LuckPerms detection
+        if (getServer().getPluginManager().getPlugin("LuckPerms") == null) {
+            getLogger().severe("LuckPerms not found! Disabling plugin.");
+            getLogger().severe("Please install to get working Prefixes!");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
         }
+        luckPerms = LuckPermsProvider.get();
+        getLogger().info("LuckPerms API hooked successfully!");
 
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this.proxyManager);
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
