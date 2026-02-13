@@ -37,6 +37,7 @@ public class Config {
                 "§7Website §8» §ewww.soulsmc.eu",
                 "§7Forum §8» §eforum.soulsmc.eu",
                 "§7Become a Team member! §8»  §eapply§8@§esoulsmc.eu§8!"));
+        this.addDefault("Server" + "." + "CityBuild", "citybuild");
         this.addDefault("Server" + "." + "DevServer", "devserver1");
         this.addDefault("Server" + "." + "BauServer", "bauserver1");
         this.addDefault("Server" + "." + "Lobby1", "lobby1");

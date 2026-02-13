@@ -87,7 +87,8 @@ public class ItemsManager {
         }
 
         List<String> cbServers = this.lobbySystem.getProxyManager().getServers().stream()
-                .filter(serverName -> serverName.startsWith("cb"))
+                .filter(serverName -> serverName.startsWith(this.lobbySystem.getConfiguration().getConfig()
+                        .getString("Server" + "." + "CityBuild")))
                 .toList();
 
         int slot = 11;
