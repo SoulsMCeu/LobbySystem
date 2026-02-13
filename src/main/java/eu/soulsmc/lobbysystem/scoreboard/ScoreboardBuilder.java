@@ -1,6 +1,7 @@
 package eu.soulsmc.lobbysystem.scoreboard;
 
 import eu.soulsmc.lobbysystem.LobbySystem;
+import io.papermc.paper.scoreboard.numbers.NumberFormat;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -101,6 +102,7 @@ public abstract class ScoreboardBuilder {
         }
 
         objective.getScore(name.getEntryName()).setScore(score);
+        objective.getScore(name.getEntryName()).numberFormat(NumberFormat.blank());
     }
 
     private void hideScore(int score) {
