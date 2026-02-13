@@ -43,7 +43,7 @@ public class LobbyScoreboard extends ScoreboardBuilder {
                     .append(GlobalTranslator.render(Component.translatable(
                             "lobby.scoreboard.score.url.website"), player.locale())), 1);
             this.setScore(Component.text("§8§m                          §2"), 0);
-        }, 1L);
+        }, 10L);
     }
 
     @Override
