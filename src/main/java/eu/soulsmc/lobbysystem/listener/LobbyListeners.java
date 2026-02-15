@@ -389,7 +389,7 @@ public class LobbyListeners implements Listener {
             case TNT ->  this.lobbySystem.getProxyManager().connect(player, this.lobbySystem.getConfiguration().getConfig()
                     .getString("Server" + "." + "SilentLobby1"));
             case GOLD_BLOCK ->  this.lobbySystem.getProxyManager().connect(player, this.lobbySystem.getConfiguration().getConfig()
-                    .getString("Server" + "." + "PremiumLobby1#"));
+                    .getString("Server" + "." + "PremiumLobby1"));
         }
     }
 
