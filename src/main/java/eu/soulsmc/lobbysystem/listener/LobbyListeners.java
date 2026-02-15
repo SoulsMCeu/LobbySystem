@@ -90,7 +90,8 @@ public class LobbyListeners implements Listener {
 
         double respawnHeight = Double.parseDouble(
                 this.lobbySystem.getConfiguration().getConfig().getString("Locations.RespawnHeight"));
-        if (player.getLocation().getY() <= respawnHeight) {
+        if (player.getLocation().getY() <= respawnHeight
+                && !this.lobbySystem.getLobbyManager().getBuildList().contains(player.getUniqueId())) {
             player.teleport(this.lobbySystem.getLocationManager().getLocation("Spawn"));
         }
 
