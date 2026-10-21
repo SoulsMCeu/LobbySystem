@@ -14,14 +14,14 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.translation.GlobalTranslator;
-import net.kyori.adventure.translation.TranslationRegistry;
-import net.kyori.adventure.util.UTF8ResourceBundleControl;
+import net.kyori.adventure.translation.TranslationStore;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -122,16 +122,20 @@ public class LobbySystem extends JavaPlugin {
     }
 
     private void registerTranslation() {
-        TranslationRegistry registry = TranslationRegistry.create(Key.key("lobby:localization"));
+        TranslationStore.StringBased<MessageFormat> store =
+                TranslationStore.messageFormat(Key.key("lobby", "localization"));
+
+        store.defaultLocale(Locale.US);
+
         for (Locale locale : Locale.getAvailableLocales()) {
             try {
-                ResourceBundle bundle = ResourceBundle.getBundle("lobby", locale, UTF8ResourceBundleControl.get());
-                registry.registerAll(locale, bundle, false);
+                ResourceBundle bundle = ResourceBundle.getBundle("lobby", locale);
+                store.registerAll(locale, bundle, false);
             } catch (Exception ignored) {
                 // Ignored
             }
         }
 
-        GlobalTranslator.translator().addSource(registry);
+        GlobalTranslator.translator().addSource(store);
     }
 }

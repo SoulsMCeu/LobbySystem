@@ -13,9 +13,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
-import org.bukkit.GameRule;
+import org.bukkit.GameRules;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.jetbrains.annotations.NotNull;
@@ -46,15 +47,17 @@ public class LobbyManager {
         this.lobbySystem.getServer().getWorlds().forEach(world -> this.lobbySystem.getServer().getScheduler().runTaskTimer(this.lobbySystem, () -> {
             world.setDifficulty(Difficulty.PEACEFUL);
 
-            world.setTime(0);
+            if (world.getEnvironment() == World.Environment.NORMAL) {
+                world.setTime(0);
+            }
             world.setThundering(false);
             world.setStorm(false);
             world.setPVP(false);
-            world.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
-            world.setGameRule(GameRule.MOB_GRIEFING, false);
-            world.setGameRule(GameRule.KEEP_INVENTORY, false);
-            world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
-            world.setGameRule(GameRule.NATURAL_REGENERATION, false);
+            world.setGameRule(GameRules.SHOW_ADVANCEMENT_MESSAGES, false);
+            world.setGameRule(GameRules.MOB_GRIEFING, false);
+            world.setGameRule(GameRules.KEEP_INVENTORY, false);
+            world.setGameRule(GameRules.SPAWN_MOBS, false);
+            world.setGameRule(GameRules.NATURAL_HEALTH_REGENERATION, false);
         }, 1L, 1L));
     }
 

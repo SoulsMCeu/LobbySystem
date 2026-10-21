@@ -490,7 +490,7 @@ public class LobbyListeners implements Listener {
         player.setVelocity(vector.normalize().multiply(distance));
 
         player.playSound(playerLocation, Sound.ENTITY_BLAZE_HURT, 1.0f, 1.0f);
-        player.playEffect(playerLocation, Effect.BOW_FIRE, 1);
+        player.playEffect(playerLocation, Effect.DISPENSER_PROJECTILE_LAUNCH, 1);
     }
 
     @EventHandler
